@@ -22,7 +22,7 @@ public class DataAccess
 {
 	// Some database-specific details we'll need
 	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_URL = "jdbc:mysql://shruti-genpact-db.cvv7rzxrleoz.us-east-1.rds.amazonaws.com:3306/alm";
+	private static final String DB_URL = "jdbc:mysql://shruti-genpact-db.cvv7rzxrleoz.us-east-1.rds.amazonaws.com:3306/MyShuttleDb";
 	private static final String DB_USER = "admin";
 	private static final String DB_PASS = "login%12345";
 	
@@ -32,7 +32,7 @@ public class DataAccess
 			// Bootstrap driver into JVM
 			Class.forName(DB_DRIVER);
 
-			String conStr = System.getenv("MYSQLCONNSTR_alm");
+			String conStr = System.getenv("MYSQLCONNSTR_MyShuttleDb");
 			if (conStr == null || conStr.trim().length() == 0) {
 				theConnection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 			} else {
