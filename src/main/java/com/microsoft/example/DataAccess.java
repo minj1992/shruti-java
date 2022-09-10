@@ -24,7 +24,7 @@ public class DataAccess
 	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 	private static final String DB_URL = "jdbc:mysql://myshuttledb.cvv7rzxrleoz.us-east-1.rds.amazonaws.com:3306/myshuttledb";
 	private static final String DB_USER = "admin";
-	private static final String DB_PASS = "login%12345";
+	private static final String DB_PASS = "login#12345";
 	
 	private static Connection theConnection;
 	static {
