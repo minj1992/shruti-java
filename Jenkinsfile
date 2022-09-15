@@ -63,6 +63,7 @@ pipeline {
              input {
                 message "Should we continue?"
                 ok "Yes we Should"
+             }
             steps{
                 echo "====++++executing deployement..."
                 deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://34.170.124.154:8080/')], contextPath: null, war: '**/*.war'
