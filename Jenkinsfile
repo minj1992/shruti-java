@@ -53,7 +53,7 @@ pipeline {
         stage("Nexus-artifact-uploader"){
             steps{
 
-                nexusArtifactUploader artifacts: [[artifactId: 'myshuttledev', classifier: '', file: 'target/myshuttledev-0.0.1-SNAPSHOT.war', type: 'war']], credentialsId: 'nexus', groupId: 'com.microsoft.example', nexusUrl: '35.239.17.85:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'realtime-project-snapshot', version: '0.0.1-SNAPSHOT'
+                nexusArtifactUploader artifacts: [[artifactId: 'myshuttledev', classifier: '', file: 'target/myshuttledev.war', type: 'war']], credentialsId: 'nexus', groupId: 'com.microsoft.example', nexusUrl: '35.239.17.85:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'realtime-project-snapshot', version: '0.0.1-SNAPSHOT'
                
 
             }
