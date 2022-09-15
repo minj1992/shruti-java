@@ -38,7 +38,7 @@ pipeline {
         }
                  stage('Building') {
             steps {
-                sh 'mvn clean deploye'
+                sh 'mvn clean package'
             
             }
             post {
@@ -53,7 +53,9 @@ pipeline {
         stage("Nexus-artifact-deploye"){
             steps{
                 echo "====++++executing Nexus-artifact-deploye++++===="
+
                 slackSend channel: 'realtime-java-automation', message: 'nexus-artifact-deploye started.'
+                sh 'mvn deploy'
                 nexusArtifactUploader artifacts: [[artifactId: 'myshuttle', classifier: '', file: 'target/myshuttledev-0.0.1-SNAPSHOT', type: 'WAR']], credentialsId: 'nexus', groupId: 'com.microsoft.example', nexusUrl: '35.239.17.85:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'realtime-project-snapshot', version: '0.0.1-SNAPSHOT'
             }
             post{
