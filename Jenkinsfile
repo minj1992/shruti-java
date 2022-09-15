@@ -38,7 +38,7 @@ pipeline {
         }
                  stage('Building') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean deploye'
             
             }
             post {
@@ -47,8 +47,27 @@ pipeline {
     archiveArtifacts artifacts: 'target/*.war, *.sql', followSymlinks: false
   }
 }
-
+      
             
+        }
+        stage("Nexus-artifact-deploye"){
+            steps{
+                echo "====++++executing Nexus-artifact-deploye++++===="
+                slackSend channel: 'realtime-java-automation', message: 'nexus-artifact-deploye started.'
+                nexusArtifactUploader artifacts: [[artifactId: 'myshuttle', classifier: '', file: 'target/myshuttledev-0.0.1-SNAPSHOT', type: 'WAR']], credentialsId: 'nexus', groupId: 'com.microsoft.example', nexusUrl: '35.239.17.85:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'realtime-project-snapshot', version: '0.0.1-SNAPSHOT'
+            }
+            post{
+                always{
+                    echo "====++++always++++===="
+                }
+                success{
+                    echo "====++++Nexus-artifact-deploye executed successfully++++===="
+                }
+                failure{
+                    echo "====++++Nexus-artifact-deploye execution failed++++===="
+                }
+        
+            }
         }
         stage("deployement"){
             steps{
@@ -61,9 +80,11 @@ pipeline {
                 }
                 success{
                     echo "====++++A executed successfully++++===="
+                    slackSend channel: 'realtime-java-automation', message: 'Success-deployement..'
                 }
                 failure{
                     echo "====++++A execution failed++++===="
+                    slackSend channel: 'realtime-java-automation', message: 'deployement failed..'
                 }
         
             }
